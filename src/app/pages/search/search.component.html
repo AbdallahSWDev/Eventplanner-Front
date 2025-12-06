@@ -1,0 +1,54 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <span class="logo">EventPlanner</span>
+  </div>
+  <div class="navbar-right">
+    <a routerLink="/events">Home</a>
+    <a routerLink="/create-event">Create Event</a>
+    <a routerLink="/search" class="active">Search</a>
+    <a (click)="logout()" class="logout">Logout</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h2>Search Events & Tasks</h2>
+
+  <div class="form">
+    <input placeholder="Keyword" [(ngModel)]="keyword">
+    <input type="date" [(ngModel)]="start_date">
+    <input type="date" [(ngModel)]="end_date">
+
+    <select [(ngModel)]="role">
+      <option value="">Any role</option>
+      <option value="organizer">Organizer</option>
+      <option value="attendee">Attendee</option>
+    </select>
+
+    <select [(ngModel)]="type">
+      <option value="both">Both</option>
+      <option value="event">Events</option>
+      <option value="task">Tasks</option>
+    </select>
+
+    <button (click)="onSearch()">Search</button>
+  </div>
+
+  <hr>
+
+  <div class="results-grid" *ngFor="let r of results">
+    <div *ngIf="r.type === 'event'" class="result-card event-card">
+      <h3>Event: {{ r.event.title }}</h3>
+      <p>{{ r.event.description }}</p>
+      <p>Date: {{ r.event.date | date:'medium' }}</p>
+      <button [routerLink]="['/event', r.event.id]">Event Details</button>
+    </div>
+
+    <div *ngIf="r.type === 'task'" class="result-card task-card">
+      <h3>Task: {{ r.task.title }}</h3>
+      <p>{{ r.task.description }}</p>
+      <p>Event: {{ r.event.title }}</p>
+      <button [routerLink]="['/event', r.event.id]">Event Details</button>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,70 @@
+<div class="auth-container">
+  <h2>Create an Account</h2>
+
+  <form (ngSubmit)="onSignup()" #signupForm="ngForm" novalidate>
+    <input
+      type="text"
+      [(ngModel)]="firstName"
+      name="firstName"
+      placeholder="First Name"
+      required
+    />
+
+    <input
+      type="text"
+      [(ngModel)]="lastName"
+      name="lastName"
+      placeholder="Last Name"
+      required
+    />
+
+    <input
+      type="email"
+      [(ngModel)]="email"
+      name="email"
+      placeholder="Email"
+      required
+    />
+
+    <input
+      type="password"
+      [(ngModel)]="password"
+      name="password"
+      placeholder="Password"
+      required
+    />
+
+    <input
+      type="password"
+      [(ngModel)]="confirmPassword"
+      name="confirmPassword"
+      placeholder="Confirm Password"
+      required
+      (input)="checkPasswordMatch()"
+    />
+
+    <p class="error" *ngIf="passwordMismatch">⚠ Passwords do not match</p>
+
+    <input
+      type="date"
+      [(ngModel)]="birthDate"
+      name="birthDate"
+      required
+    />
+
+    <!-- Show backend error -->
+    <p class="error" *ngIf="serverError">{{ serverError }}</p>
+
+    <!-- Show success message -->
+    <p class="success" *ngIf="successMessage">{{ successMessage }}</p>
+
+    <button type="submit" [disabled]="passwordMismatch || signupForm.invalid || isSubmitting">
+      {{ isSubmitting ? 'Signing Up...' : 'Sign Up' }}
+    </button>
+  </form>
+
+  <div class="switch">
+    Already have an account?
+    <a routerLink="/login">Login here</a>
+  </div>
+</div>

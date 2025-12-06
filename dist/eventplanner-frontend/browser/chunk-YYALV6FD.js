@@ -1,0 +1,1 @@
+import{i,l as e,la as o}from"./chunk-SPS5S2K3.js";var a=class r{constructor(t){this.http=t}apiUrl="http://localhost:8080";register(t){return this.http.post(`${this.apiUrl}/signup`,t)}login(t){return this.http.post(`${this.apiUrl}/login`,t)}static \u0275fac=function(n){return new(n||r)(e(o))};static \u0275prov=i({token:r,factory:r.\u0275fac,providedIn:"root"})};export{a};

@@ -1,0 +1,55 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <span class="logo">EventPlanner</span>
+  </div>
+  <div class="navbar-right">
+    <a routerLink="/events">Home</a>
+    <a routerLink="/create-event">Create Event</a>
+    <a routerLink="/events/search">Search</a>
+    <a (click)="logout()" class="logout">Logout</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <h2>Event Details</h2>
+
+  <!-- Event Info -->
+  <div class="event-info" *ngIf="event">
+    <p><strong>Name:</strong> {{ event.name }}</p>
+    <p><strong>Description:</strong> {{ event.description }}</p>
+    <p><strong>Date:</strong> {{ event.date }}</p>
+    <p><strong>Location:</strong> {{ event.location }}</p>
+  </div>
+
+  <hr />
+
+  <h2>Event Attendees</h2>
+
+  <div class="attendees-grid">
+    <div class="attendee-card" *ngFor="let a of attendees">
+      <p><strong>User:</strong> {{ a.user_id }}</p>
+      <p><strong>Role:</strong> {{ a.role }}</p>
+      <p><strong>Status:</strong> {{ a.status }}</p>
+    </div>
+  </div>
+
+  <hr />
+
+  <!-- Invite -->
+  <h3>Invite User</h3>
+  <input [(ngModel)]="inviteUserId" placeholder="User ID">
+  <button (click)="invite()">Invite</button>
+
+  <hr />
+
+  <!-- Attendance -->
+  <h3>Your Attendance</h3>
+  <div class="attendance-buttons">
+    <button (click)="setStatus('Going')">Going</button>
+    <button (click)="setStatus('Maybe')">Maybe</button>
+    <button (click)="setStatus('Not Going')">Not Going</button>
+  </div>
+
+</div>

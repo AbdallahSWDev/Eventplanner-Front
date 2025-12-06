@@ -1,0 +1,32 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <span class="logo">EventPlanner</span>
+  </div>
+  <div class="navbar-right">
+    <a routerLink="/events">Home</a>
+    <a routerLink="/create-event" class="active">Create Event</a>
+    <a routerLink="/search">Search</a>
+    <a (click)="logout()" class="logout">Logout</a>
+  </div>
+</nav>
+
+<div class="container">
+  <h2>Create Event</h2>
+
+  <div class="form">
+    <label>Title</label>
+    <input [(ngModel)]="title" placeholder="Enter event title" />
+
+    <label>Description</label>
+    <textarea [(ngModel)]="description" placeholder="Enter event description"></textarea>
+
+    <label>Date</label>
+    <input type="date" [(ngModel)]="date" />
+
+    <label>Location</label>
+    <input [(ngModel)]="location" placeholder="Enter event location" />
+
+    <button (click)="createEvent()">Create Event</button>
+  </div>
+</div>

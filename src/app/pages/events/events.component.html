@@ -1,0 +1,39 @@
+<!-- Navbar -->
+<nav class="navbar">
+  <div class="navbar-left">
+    <span class="logo">EventPlanner</span>
+  </div>
+  <div class="navbar-right">
+    <a routerLink="/events">Home</a>
+    <a routerLink="/create-event" class="create-event-btn">Create Event</a>
+    <a routerLink="/search">Search</a>
+    <a (click)="logout()" class="logout">Logout</a>
+  </div>
+</nav>
+
+<div class="container">
+
+  <h2>My Organized Events</h2>
+  <div class="events-grid">
+    <div class="event-card" *ngFor="let e of organized">
+      <h3>{{ e.title }}</h3>
+      <p>{{ e.date | date:'medium' }}</p>
+      <div class="card-buttons">
+        <button class="details-btn" [routerLink]="['/event', e.id]">Event Details</button>
+        <button class="delete-btn" (click)="delete(e.id)">Delete</button>
+      </div>
+    </div>
+  </div>
+
+  <h2>Events I'm Invited To</h2>
+  <div class="events-grid">
+    <div class="event-card invited" *ngFor="let e of invited">
+      <h3>{{ e.title }}</h3>
+      <p>{{ e.date | date:'medium' }}</p>
+      <div class="card-buttons">
+        <button class="details-btn" [routerLink]="['/event', e.id]">Event Details</button>
+      </div>
+    </div>
+  </div>
+
+</div>
