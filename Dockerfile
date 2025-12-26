@@ -1,19 +1,13 @@
-FROM nginx:alpine
+FROM nginxinc/nginx-unprivileged:alpine
 
-# Remove default config
-RUN rm /etc/nginx/conf.d/default.conf
-
-# Copy custom nginx config
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+# Remove default content
+RUN rm -rf /usr/share/nginx/html/*
 
 # Copy Angular build output
 COPY dist/eventplanner-frontend /usr/share/nginx/html
 
-# Fix permissions for OpenShift
-RUN chmod -R g+rwX /var/cache/nginx \
-    && chmod -R g+rwX /usr/share/nginx/html \
-    && chmod -R g+rwX /etc/nginx \
-    && chmod -R g+rwX /tmp
+# Copy OpenShift-safe nginx config
+COPY nginx.conf /etc/nginx/conf.d/default.conf
 
 EXPOSE 8080
 
