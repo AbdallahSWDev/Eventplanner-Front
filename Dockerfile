@@ -1,16 +1,29 @@
+############################
+# 1️⃣ Build Angular app
+############################
+FROM node:18-alpine AS build
+
+WORKDIR /app
+
+COPY package*.json ./
+RUN npm install
+
+COPY . .
+RUN npm run build -- --configuration production
+
+
+############################
+# 2️⃣ Serve with Nginx
+############################
 FROM nginxinc/nginx-unprivileged:alpine
 
-# Set working directory
 WORKDIR /usr/share/nginx/html
 
-# Copy Angular build output (overwrites default index.html)
-COPY dist/eventplanner-frontend/browser /usr/share/nginx/html/
+# IMPORTANT: Angular 17 output path
+COPY --from=build /app/dist/eventplanner-frontend/browser/ .
 
-# Copy custom nginx config for Angular routing
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose Nginx unprivileged port
 EXPOSE 8080
 
-# Start Nginx in foreground
 CMD ["nginx", "-g", "daemon off;"]
