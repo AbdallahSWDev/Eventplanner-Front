@@ -1,7 +1,7 @@
 ############################
 # 1️⃣ Build Angular app
 ############################
-FROM node:18-alpine AS build
+FROM node:20-alpine AS build
 
 WORKDIR /app
 
@@ -19,7 +19,7 @@ FROM nginxinc/nginx-unprivileged:alpine
 
 WORKDIR /usr/share/nginx/html
 
-# IMPORTANT: Angular 17 output path
+# Angular 17+ output
 COPY --from=build /app/dist/eventplanner-frontend/browser/ .
 
 COPY nginx.conf /etc/nginx/conf.d/default.conf
