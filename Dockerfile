@@ -1,20 +1,16 @@
-# Use unprivileged Nginx for OpenShift
 FROM nginxinc/nginx-unprivileged:alpine
 
-# Set working directory (the unprivileged user can write here)
+# Set working directory
 WORKDIR /usr/share/nginx/html
 
-# Remove default content
-RUN rm -rf ./*
-
-# Copy Angular build output from repo
+# Copy Angular build output directly (overwrite)
 COPY dist/eventplanner-frontend/ .
 
 # Copy custom nginx config for Angular routing
 COPY nginx.conf /etc/nginx/conf.d/default.conf
 
-# Expose port 8080 (nginx unprivileged default)
+# Expose unprivileged nginx port
 EXPOSE 8080
 
-# Start nginx in foreground
+# Start nginx
 CMD ["nginx", "-g", "daemon off;"]
