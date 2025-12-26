@@ -1,7 +1,17 @@
+# Use unprivileged Nginx image
 FROM nginxinc/nginx-unprivileged:alpine
 
-# Copy Angular build output
-COPY dist/eventplanner-frontend/ /usr/share/nginx/html/
+# Set working directory
+WORKDIR /usr/share/nginx/html
 
-# Expose container port (unprivileged nginx uses 8080)
+# Remove default content
+RUN rm -rf ./*
+
+# Copy Angular build
+COPY dist/eventplanner-frontend/ .
+
+# Expose container port (8080 for unprivileged nginx)
 EXPOSE 8080
+
+# Start Nginx in foreground
+CMD ["nginx", "-g", "daemon off;"]
