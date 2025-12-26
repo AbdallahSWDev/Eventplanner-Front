@@ -1,7 +1,7 @@
-FROM nginx:alpine
+FROM nginxinc/nginx-unprivileged:alpine
 
-COPY dist/eventplanner-frontend/browser /usr/share/nginx/html/
+# Copy Angular build output
+COPY dist/eventplanner-frontend/ /usr/share/nginx/html/
 
+# Expose container port (unprivileged nginx uses 8080)
 EXPOSE 8080
-
-CMD ["nginx", "-g", "daemon off;"]
