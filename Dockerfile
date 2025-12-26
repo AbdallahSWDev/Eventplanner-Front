@@ -4,7 +4,7 @@ FROM nginxinc/nginx-unprivileged:alpine
 WORKDIR /usr/share/nginx/html
 
 # Copy Angular build output (overwrites default index.html)
-COPY dist/eventplanner-frontend/browser/ .
+COPY dist/eventplanner-frontend/browser /usr/share/nginx/html/
 
 # Copy custom nginx config for Angular routing
 COPY nginx.conf /etc/nginx/conf.d/default.conf
