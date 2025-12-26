@@ -1,12 +1,7 @@
-FROM nginxinc/nginx-unprivileged:alpine
+FROM nginx:alpine
 
-# Copy Angular build output
-COPY dist/eventplanner-frontend/ /usr/share/nginx/html/
-
-# Use a custom nginx config (must NOT write to /run)
-COPY nginx.conf /etc/nginx/conf.d/default.conf
+COPY dist/eventplanner-frontend/browser /usr/share/nginx/html/
 
 EXPOSE 8080
 
 CMD ["nginx", "-g", "daemon off;"]
-
