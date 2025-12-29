@@ -1,4 +1,4 @@
 export const environment = {
   production: true,
-  apiUrl: 'http://eventplanner-back:8080/api'
+  apiUrl: 'https://eventplanner-back-azzohry-dev.apps.rm2.thpm.p1.openshiftapps.com'
 };
